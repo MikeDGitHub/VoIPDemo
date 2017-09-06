@@ -16,8 +16,8 @@ namespace VoIPDemo
         static void Main(string[] args)
         {
             Console.WriteLine($"PushVoIP");
-            var certificate = AppDomain.CurrentDomain.BaseDirectory + @"openlive_voip.p12";
-            ApnsConfiguration config = new ApnsConfiguration(ApnsConfiguration.ApnsServerEnvironment.Sandbox, File.ReadAllBytes(certificate), "123456", false);
+            var certificate = AppDomain.CurrentDomain.BaseDirectory + @"you certificate.p12";
+            ApnsConfiguration config = new ApnsConfiguration(ApnsConfiguration.ApnsServerEnvironment.Sandbox, File.ReadAllBytes(certificate), "you certificate password", false);
             var apnsBroker = new ApnsServiceBroker(config);
             //推送异常
             apnsBroker.OnNotificationFailed += (notification, aggregateEx) =>
@@ -48,7 +48,7 @@ namespace VoIPDemo
             obj.Add("badge", 1);
             obj.Add("alert", "apple voip test !");
             obj.Add("sound", "default");
-            var voIpToken = "820fd3c1164bbc41e60f989ed01f3f0764ebe331a44a87dadac386de35352ddf";
+            var voIpToken = "you voip token";
             var payload = new JObject();
             payload.Add("aps", obj);
             var apns = new ApnsNotification()
@@ -65,30 +65,9 @@ namespace VoIPDemo
             };
             //启动代理
             apnsBroker.Start();
-            //JObject obj = new JObject();
-            //obj.Add("content-availabl", 1);
-            //obj.Add("badge", 1);
-            //obj.Add("alert", "apple voip test !");
-            //obj.Add("sound", "default");
-            //var voIpToken = "820fd3c1164bbc41e60f989ed01f3f0764ebe331a44a87dadac386de35352ddf";
-            //var payload = new JObject();
-            //payload.Add("aps", obj);
-            //var apns = new ApnsNotification()
-            //{
-            //    DeviceToken = voIpToken,
-            //    Payload = payload
-            //};
             apnsBroker.QueueNotification(apns);
 
             Console.ReadKey();
         }
-    }
-    public class Aps
-    {
-        public string sound { get; set; }
-        public int badge { get; set; }
-        public string alert { get; set; }
-        //public string extras { get; set; }
-        //public int content-available{ get; set; }
     }
 }
