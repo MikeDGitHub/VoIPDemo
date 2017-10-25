@@ -60,7 +60,7 @@ namespace VoIPDemo
             apnsBroker.OnNotificationSucceeded += (notification) =>
             {
 
-                apnsBroker.QueueNotification(apns);
+                //apnsBroker.QueueNotification(apns);
                 Console.WriteLine("Apple Notification Sent ! " + notification.DeviceToken);
             };
             //启动代理
